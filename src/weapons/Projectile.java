@@ -28,10 +28,8 @@ public class Projectile extends GameObject
 		height = 4;
 		
 		// Calculate the projectile's direction
-		direction = (float) Math.atan2(MouseInput.getMouseY() - Window.cameraY() * Window.getFrameScale(), 
-				MouseInput.getMouseX() - Window.cameraX() * Window.getFrameScale());
-		// Convert the direction to degrees and offset by the screen's direction
-		direction = (float) Math.toDegrees(direction) - Handler.getDirection();
+		//direction = (float) Math.atan2(MouseInput.getMouseY() - Window.cameraY() * Window.getFrameScale(), 
+				//MouseInput.getMouseX() - Window.cameraX() * Window.getFrameScale());
 		
 		depth = 999999999;
 	}
@@ -52,8 +50,8 @@ public class Projectile extends GameObject
 	
 	public void update()
 	{
-		x += (float) (Math.cos(Math.toRadians(direction)) * speed) - Handler.getWorldXShift();
-		y += (float) (Math.sin(Math.toRadians(direction)) * speed) + Handler.getWorldYShift();
+		//x += (float) (Math.cos(Math.toRadians(direction)) * speed) - Handler.getWorldXShift();
+		//y += (float) (Math.sin(Math.toRadians(direction)) * speed) + Handler.getWorldYShift();
 		
 		for (int i = 0; i < Handler.getObjectList().size(); i++)
 		{

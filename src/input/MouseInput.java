@@ -1,9 +1,5 @@
 package input;
 
-import main.Handler;
-import main.Window;
-import weapons.Projectile;
-
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -42,15 +38,7 @@ public class MouseInput implements MouseListener, MouseMotionListener
 
 	public void mousePressed(MouseEvent e)
 	{
-		int button = e.getButton();
 		
-		// Fire
-		if (button == MouseEvent.BUTTON1)
-		{
-			Handler.modifyingList = true;
-			Handler.addObject(new Projectile((int) Window.cameraX(), (int) Window.cameraY(), 10));
-			Handler.modifyingList = false;
-		}
 	}
 
 	public void mouseReleased(MouseEvent e)

@@ -31,11 +31,11 @@ public abstract class GameObject implements Comparable<GameObject>
 	/** Calculate the position of the object and call it's update method */
 	public void tick()
 	{
-		x = (int) (xOrigin + Handler.getWorldX());
-		y = (int) (yOrigin + Handler.getWorldY());
+		x = (int) (xOrigin);
+		y = (int) (yOrigin);
 		
-		xDistToScreen = (Window.cameraX() - x);
-		yDistToScreen = (Window.cameraY() - y);
+		xDistToScreen = (Handler.player.getX() - x);
+		yDistToScreen = (Handler.player.getY() - y);
 		
 		update();
 	}

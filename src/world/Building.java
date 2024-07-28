@@ -1,7 +1,6 @@
 package world;
 
 import main.Handler;
-import main.Window;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -16,42 +15,42 @@ public class Building extends GeomObject
 	public void paintComponent(Graphics g)
 	{
 		// NORTH WALL
-		if (Window.cameraY() < y-sizeYCut)
+		if (Handler.player.getY() < y-heightHalf)
 		{
 			g.setColor(Color.BLUE);
-			g.fillPolygon(new int[] { (int) (block2X-sizeXCut*scale), x-sizeXCut, x+sizeXCut},                      new int[] { (int) (block2Y-sizeYCut*scale), y-sizeYCut, y-sizeYCut },                     3); // NORTH WALL BOTTOM
-			g.fillPolygon(new int[] { (int) (block2X-sizeXCut*scale), x+sizeXCut, (int) (block2X+sizeXCut*scale) }, new int[] { (int) (block2Y-sizeYCut*scale), y-sizeYCut, (int) (block2Y-sizeYCut*scale) }, 3); // NORTH WALL TOP
+			g.fillPolygon(new int[] { (int) (topX-widthHalf*scale), x-widthHalf, x+widthHalf},                      new int[] { (int) (topY-heightHalf*scale), y-heightHalf, y-heightHalf },                  3); // NORTH WALL BOTTOM
+			g.fillPolygon(new int[] { (int) (topX-widthHalf*scale), x+widthHalf, (int) (topX+widthHalf*scale) },    new int[] { (int) (topY-heightHalf*scale), y-heightHalf, (int) (topY-heightHalf*scale) }, 3); // NORTH WALL TOP
 		}
 		
 		// SOUTH WALL
-		if (Window.cameraY() > y+sizeYCut)
+		if (Handler.player.getY() > y+heightHalf)
 		{
 			g.setColor(Color.CYAN);
-			g.fillPolygon(new int[] { (int) (block2X-sizeXCut*scale), x-sizeXCut, x+sizeXCut },                     new int[] { (int) (block2Y+sizeYCut*scale), y+sizeYCut, y+sizeYCut},                      3); // SOUTH WALL BOTTOM
-			g.fillPolygon(new int[] { (int) (block2X-sizeXCut*scale), x+sizeXCut, (int) (block2X+sizeXCut*scale) }, new int[] { (int) (block2Y+sizeYCut*scale), y+sizeYCut, (int) (block2Y+sizeYCut*scale) }, 3); // SOUTH WALL TOP
+			g.fillPolygon(new int[] { (int) (topX-widthHalf*scale), x-widthHalf, x+widthHalf },                     new int[] { (int) (topY+heightHalf*scale), y+heightHalf, y+heightHalf},                   3); // SOUTH WALL BOTTOM
+			g.fillPolygon(new int[] { (int) (topX-widthHalf*scale), x+widthHalf, (int) (topX+widthHalf*scale) },    new int[] { (int) (topY+heightHalf*scale), y+heightHalf, (int) (topY+heightHalf*scale) }, 3); // SOUTH WALL TOP
 		}
 		// EAST WALL
-		if (Window.cameraX() > x+sizeXCut)
+		if (Handler.player.getX() > x+widthHalf)
 		{
 			g.setColor(Color.MAGENTA);
-			g.fillPolygon(new int[] { x+sizeXCut,                     x+sizeXCut, (int) (block2X+sizeXCut*scale) },  new int[] { y+sizeYCut,                     y-sizeYCut, (int) (block2Y+sizeYCut*scale) }, 3); // EAST WALL BOTTOM
-			g.fillPolygon(new int[] { (int) (block2X+sizeXCut*scale), x+sizeXCut, (int) (block2X+sizeXCut*scale) },  new int[] { (int) (block2Y+sizeYCut*scale), y-sizeYCut, (int) (block2Y-sizeYCut*scale) }, 3); // EAST WALL TOP
+			g.fillPolygon(new int[] { x+widthHalf,                  x+widthHalf, (int) (topX+widthHalf*scale) },     new int[] { y+heightHalf,                  y-heightHalf, (int) (topY+heightHalf*scale) }, 3); // EAST WALL BOTTOM
+			g.fillPolygon(new int[] { (int) (topX+widthHalf*scale), x+widthHalf, (int) (topX+widthHalf*scale) },     new int[] { (int) (topY+heightHalf*scale), y-heightHalf, (int) (topY-heightHalf*scale) }, 3); // EAST WALL TOP
 		}
 		
 		// WEST WALL
-		if (Window.cameraX() < x-sizeXCut)
+		if (Handler.player.getX() < x-widthHalf)
 		{
 			g.setColor(Color.MAGENTA);
-			g.fillPolygon(new int[] { x-sizeXCut,                     x-sizeXCut, (int) (block2X-sizeXCut*scale) },  new int[] { y+sizeYCut,                     y-sizeYCut, (int) (block2Y+sizeYCut*scale) }, 3); // WEST WALL BOTTOM
-			g.fillPolygon(new int[] { (int) (block2X-sizeXCut*scale), x-sizeXCut, (int) (block2X-sizeXCut*scale) },  new int[] { (int) (block2Y+sizeYCut*scale), y-sizeYCut, (int) (block2Y-sizeYCut*scale) }, 3); // WEST WALL TOP
+			g.fillPolygon(new int[] { x-widthHalf,                  x-widthHalf, (int) (topX-widthHalf*scale) },     new int[] { y+heightHalf,                  y-heightHalf, (int) (topY+heightHalf*scale) }, 3); // WEST WALL BOTTOM
+			g.fillPolygon(new int[] { (int) (topX-widthHalf*scale), x-widthHalf, (int) (topX-widthHalf*scale) },     new int[] { (int) (topY+heightHalf*scale), y-heightHalf, (int) (topY-heightHalf*scale) }, 3); // WEST WALL TOP
 		}
 		
 		// ROOF BLOCK
 		g.setColor(Color.BLACK);
-		g.fillRect((int) (block2X-sizeXCut*scale), (int) (block2Y-sizeYCut*scale), (int) (width*scale) + 1, (int) (height*scale));
+		g.fillRect((int) (topX-widthHalf*scale), (int) (topY-heightHalf*scale), (int) (width*scale) + 1, (int) (height*scale));
 		
 		g.setColor(Color.WHITE);
-		g.drawRect((int) (block2X-sizeXCut*scale), (int) (block2Y-sizeYCut*scale), (int) (width*scale) + 1, (int) (height*scale));
+		g.drawRect((int) (topX-widthHalf*scale), (int) (topY-heightHalf*scale), (int) (width*scale) + 1, (int) (height*scale));
 		
 		if (Handler.showBounds)
 		{

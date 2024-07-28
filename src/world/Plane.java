@@ -14,9 +14,9 @@ public class Plane extends GeomObject
 	{
 		roofHeight = 4;
 		g.setColor(Color.BLACK);
-		g.fillRect((int) (block2X-sizeXCut*scale), (int) (block2Y-sizeYCut*scale), (int) (width*scale) + 1, (int) (height*scale));
+		g.fillRect((int) (topX-widthHalf*scale), (int) (topY-heightHalf*scale), (int) (width*scale) + 1, (int) (height*scale));
 		
 		g.setColor(Color.WHITE);
-		g.drawRect((int) (block2X-sizeXCut*scale), (int) (block2Y-sizeYCut*scale), (int) (width*scale) + 1, (int) (height*scale));
+		g.drawRect((int) (topX-widthHalf*scale), (int) (topY-heightHalf*scale), (int) (width*scale) + 1, (int) (height*scale));
 	}
 }

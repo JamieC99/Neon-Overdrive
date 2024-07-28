@@ -9,13 +9,13 @@ import java.awt.Rectangle;
 public abstract class GeomObject extends GameObject
 {
 	/** x position of the top of the object */
-	protected float block2X;
+	protected float topX;
 	/** y position of the top of the object */
-	protected float block2Y;
+	protected float topY;
 	/** Half of the object's width */
-	protected int sizeXCut;
+	protected int widthHalf;
 	/** Half of the object's height */
-	protected int sizeYCut;
+	protected int heightHalf;
 	/** Number divided to get the height of the object */
 	protected int roofHeight = 2;
 	/** The scale of the object. Controls perspective */
@@ -29,8 +29,8 @@ public abstract class GeomObject extends GameObject
 		this.height = height;
 		this.roofHeight = roofHeight;
 		
-		sizeXCut = width / 2;
-		sizeYCut = height / 2;
+		widthHalf = width / 2;
+		heightHalf = height / 2;
 		
 		if (roofHeight == 1) scale = 2f;
 		if (roofHeight == 2) scale = 1.5f;
@@ -42,8 +42,8 @@ public abstract class GeomObject extends GameObject
 	
 	public void update()
 	{
-		block2X = (x - xDistToScreen/roofHeight);
-		block2Y = (y - yDistToScreen/roofHeight);
+		topX = (x - xDistToScreen/roofHeight);
+		topY = (y - yDistToScreen/roofHeight);
 		
 		if (getBounds().intersects(Handler.getPlayerBounds()))
 		{

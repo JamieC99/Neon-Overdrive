@@ -1,31 +1,71 @@
-package main;  
+package main;
 
 import input.ScreenButton;
+import world.Building;
+import world.Plane;
+import characters.PlayerCharacter;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.Random;
+import javax.imageio.ImageIO;
 
 public class Handler
 {
 	private static LinkedList<GameObject> objectList = new LinkedList<>();
+	private static LinkedList<Character> characterList = new LinkedList<>();
 	private static ArrayList<ScreenButton> buttonList = new ArrayList<>();
+	
+	public static PlayerCharacter player;
 	
 	public static boolean modifyingList = false;
 	public static boolean showBounds = false;
 	
-	private static float worldX, worldY;
-	private static float worldXShift, worldYShift;
-	
-	private static float direction;
-	private static float turnRate;
-	private static float speed;
-	private static float acceleration;
-	
-	private static boolean driving;
-	private static String steeringDirection = "";
+	public static void initialize()
+	{
+		// Check each pixel of the buildingLayout image and spawn
+		// the desired object based on the pixel colour
+		// Red = Building, blue = plane
+		BufferedImage cityImage;
+		int cityImageWidth, cityImageHeight;
+		try
+		{
+			File input = new File("resources/buildingLayout.png");
+			cityImage = ImageIO.read(input);
+			cityImageWidth = cityImage.getWidth();
+			cityImageHeight = cityImage.getHeight();
+			Random rand = new Random();
+			
+			for (int i = 0; i < cityImageHeight; i++)
+			{
+				for (int j = 0; j < cityImageWidth; j++)
+				{
+					Color c = new Color(cityImage.getRGB(j, i));
+					
+					// Create building
+					int height = rand.nextInt(1, 4);
+					if (c.getRed() == 255 && c.getGreen() == 0 && c.getBlue() == 0)
+						Handler.addObject(new Building(j * 128 + 128, i * 128 + 128, 256, 256, height));
+					
+					// Create plane
+					if (c.getRed() == 0 && c.getGreen() == 0 && c.getBlue() == 255)
+						Handler.addObject(new Plane(j * 64 + 64, i * 64 + 64, 256, 256, 4));
+				}
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		player = new PlayerCharacter(2000, 2000, "Player");
+	}
 	
 	public static void paintComponent(Graphics g)
 	{
@@ -37,7 +77,10 @@ public class Handler
 		
 		modifyingList = true;
 		Collections.sort(objectList);
+		Collections.sort(characterList);
 		modifyingList = false;
+		
+		player.paintComponent(g);
 		
 		// Draw game objects
 		for (GameObject object : objectList)
@@ -69,44 +112,16 @@ public class Handler
 			}
 		}
 		
-		control();
-	}
-	
-	private static void control()
-	{
-		// Rotation and world positioning
-		worldXShift = (float) (Math.cos(Math.toRadians(direction-90)) * acceleration);
-		worldYShift = (float) (Math.sin(Math.toRadians(direction-90)) * acceleration);
-		
-		worldX -= worldXShift;
-		worldY += worldYShift;
-		direction += turnRate;
-		
-		// Reset rotation
-		if (direction <= 0)	direction += 360;
-		if (direction >= 360) direction = 0;
-		
-		if (acceleration >= 4) acceleration = 4;
-		else if (acceleration <=- 4) acceleration =- 4;
-		
-		if (driving)
-			acceleration += speed / 100;
-		else
-		{
-			if (acceleration > 0.1f) acceleration -= 0.01f;
-			else if (acceleration <- 0.1f) acceleration += 0.01f;
-			else acceleration = 0;
-		}
-		
-		if (steeringDirection == "right") turnRate =- (acceleration / 5);
-		else if (steeringDirection == "left") turnRate = (acceleration / 5);
-		else turnRate = 0;
+		player.tick();
 	}
 	
 	public static void collideWithObject()
 	{
-		//acceleration =- acceleration;
+		
 	}
+	
+	public static int minWorldPos() { return 768; }
+	public static int maxWorldPos() { return 5375; }
 	
 	public static Rectangle getPlayerBounds()
 	{
@@ -126,64 +141,5 @@ public class Handler
 	public static LinkedList<GameObject> getObjectList()
 	{
 		return objectList;
-	}
-	
-	/** Return the world's x position */
-	public static float getWorldX()
-	{
-		return worldX;
-	}
-	/** Return the world's y position */
-	public static float getWorldY()
-	{
-		return worldY;
-	}
-	
-	public static float getWorldXShift()
-	{
-		return worldXShift;
-	}
-	
-	public static float getWorldYShift()
-	{
-		return worldYShift;
-	}
-	
-	public static void driveForwards()
-	{
-		driving = true;
-		speed =- 2;
-	}
-	
-	public static void driveBackwards()
-	{
-		driving = true;
-		speed = 2;
-	}
-	
-	public static void stop()
-	{
-		driving = false;
-		speed = 0;
-	}
-	
-	public static void turnLeft()
-	{
-		steeringDirection = "left";
-	}
-	
-	public static void turnRight()
-	{
-		steeringDirection = "right";
-	}
-	
-	public static void centerTurn()
-	{
-		steeringDirection = "";
-	}
-	
-	public static float getDirection()
-	{
-		return direction;
 	}
 }

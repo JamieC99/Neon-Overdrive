@@ -34,10 +34,7 @@ public class ScreenButton
 	
 	public void function()
 	{
-		if (function == "drive forwards")
-			Handler.driveForwards();
-		if (function == "drive backwards")
-			Handler.driveBackwards();
+		
 	}
 	
 	public Rectangle getBounds()
