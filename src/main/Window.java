@@ -21,7 +21,6 @@ public class Window extends JPanel
 	private AffineTransform transform;
 	private static float frameScale;
 	
-	@SuppressWarnings({ "deprecation", "static-access" })
 	public Window()
 	{
 		frame.setIconImage(new ImageIcon("resources/icon.png").getImage());
@@ -35,7 +34,6 @@ public class Window extends JPanel
 		frame.addMouseListener(new MouseInput());
 		frame.addMouseMotionListener(new MouseInput());
 		
-		frame.setCursor(frame.CROSSHAIR_CURSOR);
 		frame.setVisible(true);
 	}
 	
@@ -46,25 +44,26 @@ public class Window extends JPanel
 		Graphics2D g2d = (Graphics2D) g;
 		
 		// Set background
-		g.setColor(Color.BLACK);
+		g.setColor(Color.CYAN);
 		g.fillRect(0, 0, frame.getWidth(), frame.getHeight());
 		
-		frameScale = 1.0f * frame.getWidth() / WIDTH;
+		frameScale = 2.0f * frame.getWidth() / WIDTH;
 		g2d.scale(frameScale, frameScale);
+		g2d.translate(-WIDTH/4, -HEIGHT/4);
 		
 		// Enable rotation
 		rotateOn();
 		g2d.transform(transform);
 		
 		// Draw city
-		g2d.drawImage(new ImageIcon("resources/City.png").getImage(), (int) Handler.getWorldX(), (int) Handler.getWorldY(), null);
+		g2d.drawImage(new ImageIcon("resources/map.png").getImage(), (int) Handler.getWorldX()-512, (int) Handler.getWorldY()-512, null);
 		
 		// Disable rotation
 		rotateOff();
 		g2d.transform(transform);
 		
 		// Draw player's car
-		g.drawImage(new ImageIcon("resources/sprites/carSprite.png").getImage(), WIDTH / 2 - 16, HEIGHT / 2 - 32, 32, 64, null);
+		g.drawImage(new ImageIcon("resources/sprites/carSprite.png").getImage(), WIDTH / 2 - 16, HEIGHT / 2 - 32, 16, 32, null);
 	
 		// Enable rotation
 		rotateOn();

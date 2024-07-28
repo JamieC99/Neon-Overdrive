@@ -12,6 +12,7 @@ public class Plane extends GeomObject
 
 	public void paintComponent(Graphics g) 
 	{
+		roofHeight = 4;
 		g.setColor(Color.BLACK);
 		g.fillRect((int) (block2X-sizeXCut*scale), (int) (block2Y-sizeYCut*scale), (int) (width*scale) + 1, (int) (height*scale));
 		
