@@ -10,7 +10,7 @@ import java.awt.event.KeyListener;
 public class PlayerCharacter extends Character implements KeyListener
 {
 	private float velx, vely;
-	private float speed = 2;
+	private float speed = 1;
 	
 	public PlayerCharacter(int x, int y, String name)
 	{

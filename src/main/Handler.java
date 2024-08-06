@@ -64,7 +64,7 @@ public class Handler
 			e.printStackTrace();
 		}
 		
-		player = new PlayerCharacter(2000, 2000, "Player");
+		player = new PlayerCharacter(0, 0, "Player");
 	}
 	
 	public static void paintComponent(Graphics g)
