@@ -1,6 +1,7 @@
 package characters;
 
 import main.Handler;
+import story.*;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -10,7 +11,7 @@ import java.awt.event.KeyListener;
 public class PlayerCharacter extends Character implements KeyListener
 {
 	private float velx, vely;
-	private float speed = 1;
+	private float speed = 2;
 	
 	public PlayerCharacter(int x, int y, String name)
 	{
@@ -45,6 +46,9 @@ public class PlayerCharacter extends Character implements KeyListener
 		if (key == KeyEvent.VK_S) vely = speed;
 		if (key == KeyEvent.VK_A) velx = -speed;
 		if (key == KeyEvent.VK_D) velx = speed;
+		
+		if (key == KeyEvent.VK_SPACE) PlayerStats.AdjustPlayerMoneyInHand(20000);
+		if (key == KeyEvent.VK_CONTROL) PlayerStats.AdjustPlayerMoneyInHand(-20000);
 	}
 
 	public void keyReleased(KeyEvent e)

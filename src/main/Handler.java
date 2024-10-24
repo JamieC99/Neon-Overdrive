@@ -64,7 +64,7 @@ public class Handler
 			e.printStackTrace();
 		}
 		
-		player = new PlayerCharacter(0, 0, "Player");
+		player = new PlayerCharacter(2000, 2000, "Player");
 	}
 	
 	public static void paintComponent(Graphics g)
@@ -87,6 +87,10 @@ public class Handler
 		{
 			object.paintComponent(g);
 		}
+		
+		// GUI
+		//g2d.drawString("TEST", 32, 32);
+		g.drawRect(0, 0, 32, 32);
 	}
 	
 	public static void paintButtons(Graphics g)

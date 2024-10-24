@@ -55,7 +55,7 @@ public class Building extends GeomObject
 		if (Handler.showBounds)
 		{
 			g.setColor(Color.RED);
-			g.drawRect(getBounds().x, getBounds().y, getBounds().width, getBounds().height);
+			g.drawRect((int) getBounds().getX(), (int) getBounds().getY(), (int) getBounds().getWidth(), (int) getBounds().getHeight());
 		}
 	}
 }
