@@ -1,8 +1,7 @@
 package main;
 
 import input.ScreenButton;
-import world.Building;
-import world.Plane;
+import world.*;
 import characters.PlayerCharacter;
 
 import java.awt.Color;
@@ -18,7 +17,7 @@ import javax.imageio.ImageIO;
 
 public class Handler
 {
-	private static LinkedList<GameObject> objectList = new LinkedList<>();
+	private static LinkedList<GeomObject> objectList = new LinkedList<>();
 	private static LinkedList<Character> characterList = new LinkedList<>();
 	private static ArrayList<ScreenButton> buttonList = new ArrayList<>();
 	
@@ -51,11 +50,7 @@ public class Handler
 					// Create building
 					int height = rand.nextInt(1, 4);
 					if (c.getRed() == 255 && c.getGreen() == 0 && c.getBlue() == 0)
-						Handler.addObject(new Building(j * 128 + 128, i * 128 + 128, 256, 256, height));
-					
-					// Create plane
-					if (c.getRed() == 0 && c.getGreen() == 0 && c.getBlue() == 255)
-						Handler.addObject(new Plane(j * 64 + 64, i * 64 + 64, 256, 256, 4));
+						addObject(new Building(j * 128 + 128, i * 128 + 128, 256, 256, 4));
 				}
 			}
 		}
@@ -83,7 +78,7 @@ public class Handler
 		player.paintComponent(g);
 		
 		// Draw game objects
-		for (GameObject object : objectList)
+		for (GeomObject object : objectList)
 		{
 			object.paintComponent(g);
 		}
@@ -132,7 +127,7 @@ public class Handler
 		return new Rectangle(Window.getWindowWidth() / 2 - 16, Window.getWindowHeight() / 2 - 32, 32, 64);
 	}
 	
-	public static void addObject(GameObject object)
+	public static void addObject(GeomObject object)
 	{
 		objectList.add(object);
 	}
@@ -142,7 +137,7 @@ public class Handler
 		objectList.remove(object);
 	}
 	
-	public static LinkedList<GameObject> getObjectList()
+	public static LinkedList<GeomObject> getObjectList()
 	{
 		return objectList;
 	}
