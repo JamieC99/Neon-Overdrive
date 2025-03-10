@@ -77,7 +77,7 @@ public class Building extends GeomObject
 		
 		if (Handler.player.getX() > x+widthHalf)
 		{
-			int imageResolution = 32;
+			int imageResolution = 16;
 			
 			int roofEdge = (int) (topX+widthHalf*scale);
 			int floorEdge = (int) (x + widthHalf);

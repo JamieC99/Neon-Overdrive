@@ -50,10 +50,17 @@ public class Window extends JPanel
 		g.setColor(new Color(0, 148, 255));
 		g.fillRect(0, 0, frame.getWidth(), frame.getHeight());
 		
+		
 		// Scale and translation
 		frameScale = 1.0f * frame.getWidth() / WIDTH;
 		g2d.scale(frameScale, frameScale);
-		g2d.translate(viewportX + WIDTH / 2, viewportY + HEIGHT / 2);
+		
+		g2d.translate((viewportX + WIDTH / 2), (viewportY + HEIGHT / 2));
+		
+		//g2d.rotate(45);
+		
+		//g2d.translate(-512, 512);
+		
 		
 		// Draw city
 		g2d.drawImage(mapImage, 0, 0, null);
